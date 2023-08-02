@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.select.SelectActivity"
+    android:background="@color/app_background_color">
+
+    <TextView
+        android:id="@+id/select_top_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mwobwa"
+        android:textAppearance="@style/ColorTextStyle"
+        android:textSize="70sp"
+        android:gravity="center"
+        android:layout_marginTop="70dp"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/select_middle_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="구독하고 계신 OTT 서비스를\n\n선택해 주세요"
+        android:textAppearance="@style/ColorTextStyle"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:layout_marginTop="70dp"
+        app:layout_constraintTop_toBottomOf="@id/select_top_text"/>
+
+    <TextView
+        android:id="@+id/select_netflix"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Netflix"
+        android:textAppearance="@style/ColorTextStyle"
+        android:textSize="50sp"
+        android:gravity="center"
+        android:layout_marginTop="70dp"
+        app:layout_constraintTop_toBottomOf="@id/select_middle_text"/>
+
+    <TextView
+        android:id="@+id/select_disney"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Disney"
+        android:textAppearance="@style/ColorTextStyle"
+        android:textSize="50sp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/select_netflix"/>
+
+    <TextView
+        android:id="@+id/select_coupang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Coupang"
+        android:textAppearance="@style/ColorTextStyle"
+        android:textSize="50sp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/select_disney"/>
+
+    <Button
+        android:id="@+id/select_btn"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_round_gray_10dp"
+        android:text="확인"
+        android:textAppearance="@style/BtnTextStyle"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/select_coupang"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
