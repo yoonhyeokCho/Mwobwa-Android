@@ -15,7 +15,7 @@
         android:theme="@style/Theme.Mwobwa"
         tools:targetApi="31">
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.select.SelectActivity"
             android:exported="true"
             android:theme="@style/Theme.Mwobwa.splash">
             <intent-filter>
@@ -23,6 +23,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="true">
 
         </activity>
     </application>
