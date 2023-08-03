@@ -5,6 +5,9 @@ plugins {
     id 'kotlin-kapt'
 }
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 android {
     compileSdk 33
 
@@ -16,6 +19,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "TMDB_API_KEY", properties['TMDB_API_KEY']
     }
 
     buildTypes {
@@ -59,4 +64,14 @@ dependencies {
 
     //DataStore
     implementation('androidx.datastore:datastore-preferences:1.0.0')
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+
+    // OKhttp3
+    implementation "com.squareup.okhttp3:okhttp:4.9.3"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.3"
+
+    implementation "androidx.fragment:fragment-ktx:1.5.0"
 }
