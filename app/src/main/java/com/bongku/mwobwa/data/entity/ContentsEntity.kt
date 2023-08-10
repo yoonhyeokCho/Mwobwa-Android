@@ -1,11 +1,12 @@
 package com.bongku.mwobwa.data.entity
+
 import com.google.gson.annotations.SerializedName
 
-data class ContentsEntity (
-    val results: List<Result>
+data class ContentsEntity(
+    val results: List<ContentsResult>
 )
 
-data class Result(
+data class ContentsResult(
     val adult: Boolean,
     @SerializedName("genre_ids")
     val genreIDS: List<Long>,
@@ -18,5 +19,6 @@ data class Result(
     @SerializedName("vote_average")
     val voteAverage: Double,
     @SerializedName("vote_count")
-    val voteCount: Long
+    val voteCount: Long,
+    var company: String = ""
 )
