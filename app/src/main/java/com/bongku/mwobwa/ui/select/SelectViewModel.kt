@@ -11,18 +11,16 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SelectViewModel @Inject constructor() : ViewModel() {
-    private val _firstAccess = MutableLiveData<Boolean>()
-    val firstAccess get() = _firstAccess
 
-    private val mwobwaDataStore: MwobwaDataStore = MwobwaApplication.mwobwaApplication.mwobwaDataStore
+    private val _ottSetFlag = MutableLiveData<Boolean>()
+    val ottSetFlag get() = _ottSetFlag
 
-    fun setFirstAccess() = viewModelScope.launch {
-        mwobwaDataStore.setFirstAccess()
-    }
+    private val mwobwaDataStore: MwobwaDataStore =
+        MwobwaApplication.mwobwaApplication.mwobwaDataStore
 
-    fun checkFirstAccess() = viewModelScope.launch {
-        val accessFlag = mwobwaDataStore.getFirstAccess()
-        _firstAccess.value = accessFlag
+    fun setContents(contents: List<String>) = viewModelScope.launch {
+        mwobwaDataStore.setOttCompany(contents)
+        _ottSetFlag.value = true
     }
 
 }
