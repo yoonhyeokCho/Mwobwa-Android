@@ -8,6 +8,7 @@ import com.bongku.mwobwa.MwobwaApplication
 import com.bongku.mwobwa.data.datastore.MwobwaDataStore
 import com.bongku.mwobwa.data.entity.ContentsEntity
 import com.bongku.mwobwa.data.repository.ContentsRepositoryImpl
+import com.bongku.mwobwa.extension.LiveDataExtension
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,10 +18,10 @@ class HomeViewModel @Inject constructor(
     private val contentsRepository: ContentsRepositoryImpl
 ) : ViewModel() {
 
-    private val _contentsResponse = MutableLiveData<ContentsEntity>()
+    private val _contentsResponse = LiveDataExtension<ContentsEntity>()
     val contentsResponse get() = _contentsResponse
 
-    private val _ottCompany = MutableLiveData<List<String>>()
+    private val _ottCompany = LiveDataExtension<List<String>>()
     val ottCompany get() = _ottCompany
 
     private val mwobwaDataStore: MwobwaDataStore =
