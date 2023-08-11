@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bongku.mwobwa.BuildConfig
@@ -44,27 +45,28 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        contentsList.clear()
 
 
-        initGetOttCompany()
+        viewModel.getOttCompany()
+        initOttCompanyObserver()
         initContentsObserver()
     }
 
     private fun initContentsObserver() {
-        viewModel.contentsResponse.observe(viewLifecycleOwner) {
+        viewModel.contentsResponse.observe(viewLifecycleOwner, Observer {
             val contents = getRandomContents(it)
             contentsList.add(contents)
             initAdapter(contentsList)
-        }
+        })
     }
 
-    private fun initGetOttCompany() {
-        viewModel.getOttCompany()
-        viewModel.ottCompany.observe(viewLifecycleOwner) {
+    private fun initOttCompanyObserver() {
+        viewModel.ottCompany.observe(viewLifecycleOwner, Observer {
             for (company in it) {
                 initGetContents("movie", false, 1, company)
             }
-        }
+        })
     }
 
     private fun initGetContents(
@@ -77,6 +79,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun getRandomContents(contents: ContentsEntity): ContentsResult {
+
         val randomIndex = Random.nextInt(contents.results.size - 1)
         return contents.results[randomIndex]
     }
@@ -93,5 +96,4 @@ class HomeFragment : Fragment() {
         super.onDestroy()
         _binding = null
     }
-
 }
