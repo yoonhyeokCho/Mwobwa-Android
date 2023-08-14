@@ -20,5 +20,6 @@ data class ContentsResult(
     val voteAverage: Double,
     @SerializedName("vote_count")
     val voteCount: Long,
-    var company: String = ""
+    var company: String = "",
+    val poster_path: String
 )
