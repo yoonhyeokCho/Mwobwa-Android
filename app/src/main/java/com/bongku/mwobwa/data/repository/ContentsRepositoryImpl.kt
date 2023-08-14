@@ -15,11 +15,26 @@ class ContentsRepositoryImpl @Inject constructor(
         withCompanies: String
     ): ContentsEntity {
         return contentsApi.getContents(
-            api_key=BuildConfig.TMDB_API_KEY,
+            api_key = BuildConfig.TMDB_API_KEY,
             mediaType = mediaType,
             includeAdult = includeAdult,
             page = page,
             withCompanies = withCompanies
+        )
+    }
+
+    override suspend fun getSearchContents(
+        mediaType: String,
+        name: String,
+        includeAdult: Boolean,
+        page: Int
+    ): ContentsEntity {
+        return contentsApi.getSearchContents(
+            api_key = BuildConfig.TMDB_API_KEY,
+            mediaType = mediaType,
+            name = name,
+            includeAdult = includeAdult,
+            page = page
         )
     }
 }

@@ -9,4 +9,11 @@ interface ContentsRepository {
         page: Int,
         withCompanies: String
     ): ContentsEntity
+
+    suspend fun getSearchContents(
+        mediaType: String,
+        name: String,
+        includeAdult: Boolean,
+        page: Int,
+    ): ContentsEntity
 }
