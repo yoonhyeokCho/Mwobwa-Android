@@ -17,4 +17,14 @@ interface ContentsService {
         @Query("sort_by") sortBy: String = "popularity.desc",
         @Query("with_companies") withCompanies: String,
     ): ContentsEntity
+
+    @GET("search/{mediaType}")
+    suspend fun getSearchContents(
+        @Path("mediaType") mediaType: String,
+        @Query("api_key") api_key: String,
+        @Query("query") name: String,
+        @Query("include_adult") includeAdult: Boolean,
+        @Query("language") language: String = "ko-KR",
+        @Query("page") page: Int
+    ): ContentsEntity
 }
