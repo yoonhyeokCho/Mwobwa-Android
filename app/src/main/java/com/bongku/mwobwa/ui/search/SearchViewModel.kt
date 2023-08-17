@@ -1,5 +1,6 @@
 package com.bongku.mwobwa.ui.search
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,8 +15,11 @@ class SearchViewModel @Inject constructor(
     private val contentsRepository: ContentsRepositoryImpl
 ) : ViewModel() {
 
-    private val _searchContentsResponse = MutableLiveData<ContentsEntity>()
-    val searchContentsResponse get() = _searchContentsResponse
+    private val _searchMovieContentsResponse = MutableLiveData<ContentsEntity>()
+    val searchMovieContentsResponse get() = _searchMovieContentsResponse
+
+    private val _searchTvContentsResponse = MutableLiveData<ContentsEntity>()
+    val searchTvContentsResponse get() = _searchTvContentsResponse
 
     fun getSearchContents(
         mediaType: String,
@@ -24,9 +28,15 @@ class SearchViewModel @Inject constructor(
         page: Int
     ) {
         viewModelScope.launch {
-            _searchContentsResponse.value = contentsRepository.getSearchContents(
-                mediaType, name, includeAdult, page
-            )
+            if (mediaType == "movie") {
+                _searchMovieContentsResponse.value = contentsRepository.getSearchContents(
+                    mediaType, name, includeAdult, page
+                )
+            } else {
+                _searchTvContentsResponse.value = contentsRepository.getSearchContents(
+                    mediaType, name, includeAdult, page
+                )
+            }
         }
     }
 }
