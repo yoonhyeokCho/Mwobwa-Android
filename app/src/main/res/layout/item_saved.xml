@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/swipe_delete_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/delete_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:text="삭제"
+            android:textAppearance="@style/ColorTextStyle"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/item_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/app_background_color">
+
+        <View
+            android:id="@+id/item_saved_top_view"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/white"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/item_saved_image_view"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/item_saved_guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_saved_top_view" />
+
+        <TextView
+            android:id="@+id/item_saved_company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="OTT 제공 회사"
+            android:textAppearance="@style/ColorTextStyle"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@id/item_saved_title"
+            app:layout_constraintStart_toEndOf="@id/item_saved_guideline"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/item_saved_guideline2"/>
+
+        <TextView
+            android:id="@+id/item_saved_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="영화 제목"
+            android:textAppearance="@style/ColorTextStyle"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:ems="8"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintBottom_toTopOf="@id/item_saved_score"
+            app:layout_constraintStart_toEndOf="@id/item_saved_guideline"
+            app:layout_constraintTop_toBottomOf="@id/item_saved_company"
+            app:layout_constraintEnd_toEndOf="@id/item_saved_guideline2"/>
+
+        <TextView
+            android:id="@+id/item_saved_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="평점"
+            android:textAppearance="@style/ColorTextStyle"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/item_saved_count"
+            app:layout_constraintEnd_toStartOf="@id/item_saved_guideline2"
+            app:layout_constraintStart_toEndOf="@id/item_saved_guideline"
+            app:layout_constraintTop_toBottomOf="@id/item_saved_title" />
+
+        <TextView
+            android:id="@+id/item_saved_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00"
+            android:textAppearance="@style/ColorTextStyle"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/item_saved_guideline"
+            app:layout_constraintTop_toBottomOf="@id/item_saved_score"
+            app:layout_constraintEnd_toStartOf="@id/item_saved_guideline2"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="&lt;&lt;"
+            android:textSize="30sp"
+            android:textColor="@color/gray_color"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="@id/item_saved_guideline2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/item_saved_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.4" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/item_saved_guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
+
+
+
