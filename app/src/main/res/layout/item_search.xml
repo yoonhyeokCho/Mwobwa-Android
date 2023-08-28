@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/item_search_image_view"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -19,27 +19,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:ems="8"
+        android:maxLines="1"
         android:text="제목"
         android:textAppearance="@style/ColorTextStyle"
         android:textSize="15sp"
-        android:ems="10"
-        android:maxLines="1"
-        android:ellipsize="end"
-        app:layout_constraintEnd_toStartOf="@id/item_search_score"
+        app:layout_constraintEnd_toStartOf="@id/item_search_info"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/item_search_image_view" />
 
-    <TextView
-        android:id="@+id/item_search_score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/item_search_info"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/info_icon"
         android:layout_marginTop="10dp"
-        android:text="평점"
-        android:textAppearance="@style/ColorTextStyle"
-        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/item_search_title"
-        app:layout_constraintTop_toBottomOf="@id/item_search_image_view" />
-
-
+        app:layout_constraintTop_toBottomOf="@id/item_search_image_view"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
