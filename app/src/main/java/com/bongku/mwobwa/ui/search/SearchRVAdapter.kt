@@ -18,8 +18,18 @@ class SearchRVAdapter(
     val dataSet: List<ContentsResult>
 ) : RecyclerView.Adapter<SearchRVAdapter.ViewHolder>() {
 
-    inner class ViewHolder(val binding: ItemSearchBinding) : RecyclerView.ViewHolder(binding.root) {
+    interface ItemClick {
+        fun onInfoClick(data: ContentsResult)
+    }
 
+    var itemClick: ItemClick? = null
+
+    inner class ViewHolder(val binding: ItemSearchBinding) : RecyclerView.ViewHolder(binding.root) {
+        init {
+            binding.itemSearchInfo.setOnClickListener {
+                itemClick?.onInfoClick(dataSet[adapterPosition])
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,7 +40,6 @@ class SearchRVAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.run {
             itemSearchTitle.text = dataSet[position].title
-            itemSearchScore.text = dataSet[position].voteAverage.toString() + "점"
 
             if (dataSet[position].poster_path != null) {
                 Glide.with(itemSearchImageView)
