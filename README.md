@@ -7,6 +7,7 @@
   <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=Figma&logoColor=white">
   <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white">
 </p>
+
 이 프로젝트는 [TMDB](https://www.themoviedb.org/?language=ko) 에서 제공하는 API를 활용한 OTT별 영화 및 TV 시리즈를 랜덤하게 추천해주는 어플리케이션 입니다.
 
 
