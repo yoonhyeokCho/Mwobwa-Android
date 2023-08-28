@@ -2,23 +2,20 @@ package com.bongku.mwobwa.ui.home
 
 import android.os.Bundle
 import android.util.Log
-import android.view.ContentInfo
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bongku.mwobwa.BuildConfig
 import com.bongku.mwobwa.R
 import com.bongku.mwobwa.data.entity.ContentsEntity
 import com.bongku.mwobwa.data.entity.ContentsResult
+import com.bongku.mwobwa.data.entity.SavedContentEntity
+import com.bongku.mwobwa.data.entity.TvContentsEntity
 import com.bongku.mwobwa.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 @AndroidEntryPoint
@@ -30,6 +27,8 @@ class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by viewModels()
 
     private var contentsList: ArrayList<ContentsResult> = ArrayList()
+
+    private var media = "movie"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,15 +46,39 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         contentsList.clear()
 
-
         viewModel.getOttCompany()
         initOttCompanyObserver()
         initContentsObserver()
+        initMediaType()
+    }
+
+    private fun convertTvcontentsToContents(tvContents: TvContentsEntity): ContentsEntity {
+        val convertedResults = tvContents.results.map { tvResult ->
+            ContentsResult(
+                tvResult.genreIDS,
+                tvResult.original_name,
+                tvResult.overview,
+                tvResult.popularity,
+                tvResult.name,
+                tvResult.voteAverage,
+                tvResult.voteCount,
+                tvResult.company,
+                tvResult.poster_path
+            )
+        }
+        return ContentsEntity(convertedResults)
     }
 
     private fun initContentsObserver() {
-        viewModel.contentsResponse.observe(viewLifecycleOwner, Observer {
+        viewModel.contentsMovieResponse.observe(viewLifecycleOwner, Observer {
             val contents = getRandomContents(it)
+            contentsList.add(contents)
+            initAdapter(contentsList)
+        })
+
+        viewModel.contentsTvResponse.observe(viewLifecycleOwner, Observer {
+            val convertedContents = convertTvcontentsToContents(it)
+            val contents = getRandomContents(convertedContents)
             contentsList.add(contents)
             initAdapter(contentsList)
         })
@@ -64,18 +87,28 @@ class HomeFragment : Fragment() {
     private fun initOttCompanyObserver() {
         viewModel.ottCompany.observe(viewLifecycleOwner, Observer {
             for (company in it) {
-                initGetContents("movie", false, 1, company)
+                val randomPage = getRandomPage()
+                initGetContents(media, randomPage, company, "KR")
             }
         })
     }
 
     private fun initGetContents(
         mediaType: String,
-        includeAdult: Boolean,
         page: Int,
-        company: String
+        company: String,
+        region: String
     ) {
-        viewModel.getContents(mediaType, includeAdult, page, company)
+        var provider = 0
+        if (company == "netflix") {
+            provider = 8
+        } else if (company == "apple tv") {
+            provider = 2
+        } else {
+            provider = 337
+        }
+
+        viewModel.getContents(mediaType, page, provider, region)
     }
 
     private fun getRandomContents(contents: ContentsEntity): ContentsResult {
@@ -89,6 +122,55 @@ class HomeFragment : Fragment() {
         binding.run {
             homeNetflixRv.adapter = rvAdapter
             homeNetflixRv.layoutManager = LinearLayoutManager(requireContext())
+        }
+        rvAdapter.itemClick = object : HomeRVAdapter.ItemClick {
+            override fun onGgimClick(contentsEntity: ContentsResult) {
+                val insertedRoomData = SavedContentEntity(
+                    0,
+                    contentsEntity.title,
+                    contentsEntity.voteAverage,
+                    contentsEntity.voteCount,
+                    contentsEntity.company,
+                    contentsEntity.poster_path
+                )
+
+                viewModel.insertRoomData(insertedRoomData)
+            }
+
+        }
+    }
+
+    private fun getRandomPage(): Int {
+        val randompage = Random.nextInt(1, 21)
+        return randompage
+    }
+
+    private fun reloadContents() {
+        contentsList.clear()
+        viewModel.getOttCompany()
+    }
+
+    private fun initMediaType() {
+        binding.run {
+            homeMovie.setOnClickListener {
+                if (media == "tv") {
+                    media = "movie"
+                    it.setBackgroundResource(R.drawable.bg_round_app_color_10dp)
+                    homeTv.setBackgroundResource(R.drawable.bg_round_gray_10dp)
+
+                    reloadContents()
+                }
+            }
+
+            homeTv.setOnClickListener {
+                if (media == "movie") {
+                    media = "tv"
+                    it.setBackgroundResource(R.drawable.bg_round_app_color_10dp)
+                    homeMovie.setBackgroundResource(R.drawable.bg_round_gray_10dp)
+
+                    reloadContents()
+                }
+            }
         }
     }
 
