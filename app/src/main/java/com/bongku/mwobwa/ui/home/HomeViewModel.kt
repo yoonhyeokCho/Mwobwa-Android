@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.bongku.mwobwa.MwobwaApplication
 import com.bongku.mwobwa.data.datastore.MwobwaDataStore
 import com.bongku.mwobwa.data.entity.ContentsEntity
+import com.bongku.mwobwa.data.entity.ContentsResult
 import com.bongku.mwobwa.data.entity.SavedContentEntity
 import com.bongku.mwobwa.data.entity.TvContentsEntity
 import com.bongku.mwobwa.data.repository.ContentsRepositoryImpl
@@ -32,6 +33,8 @@ class HomeViewModel @Inject constructor(
 
     private val _ottCompany = LiveDataExtension<List<String>>()
     val ottCompany get() = _ottCompany
+
+    var previousContents: List<ContentsResult>? = null
 
     private val mwobwaDataStore: MwobwaDataStore =
         MwobwaApplication.mwobwaApplication.mwobwaDataStore
