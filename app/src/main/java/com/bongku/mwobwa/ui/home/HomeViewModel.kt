@@ -1,7 +1,5 @@
 package com.bongku.mwobwa.ui.home
 
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bongku.mwobwa.MwobwaApplication
@@ -11,7 +9,6 @@ import com.bongku.mwobwa.data.entity.ContentsResult
 import com.bongku.mwobwa.data.entity.SavedContentEntity
 import com.bongku.mwobwa.data.entity.TvContentsEntity
 import com.bongku.mwobwa.data.repository.ContentsRepositoryImpl
-import com.bongku.mwobwa.data.repository.SavedContentRepository
 import com.bongku.mwobwa.data.repository.SavedContentRepositoryImpl
 import com.bongku.mwobwa.extension.LiveDataExtension
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -93,7 +90,6 @@ class HomeViewModel @Inject constructor(
 
     fun getOttCompany() = viewModelScope.launch {
         _ottCompany.value = mwobwaDataStore.getOttCompany()
-        Log.d("test", "getOttCompany: ${mwobwaDataStore.getOttCompany()}")
     }
 
     fun insertRoomData(savedContentEntity: SavedContentEntity) =
