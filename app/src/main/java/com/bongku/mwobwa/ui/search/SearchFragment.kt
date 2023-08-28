@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bongku.mwobwa.data.entity.ContentsEntity
 import com.bongku.mwobwa.data.entity.ContentsResult
+import com.bongku.mwobwa.data.entity.TvContentsEntity
 import com.bongku.mwobwa.databinding.FragmentSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,6 +25,8 @@ class SearchFragment : Fragment() {
 
     private var moviecontentsList: ArrayList<ContentsResult> = ArrayList()
     private var tvContentsList: ArrayList<ContentsResult> = ArrayList()
+
+    private lateinit var rvAdapter: SearchRVAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,34 +48,65 @@ class SearchFragment : Fragment() {
         initEditText()
     }
 
+    private fun setInfoClickListener() {
+        rvAdapter.itemClick = object : SearchRVAdapter.ItemClick {
+            override fun onInfoClick(data: ContentsResult) {
+                showInfoDialog(data)
+            }
+        }
+    }
+
+    private fun convertTvcontentsToContents(tvContents: TvContentsEntity): ContentsEntity {
+        val convertedResults = tvContents.results.map { tvResult ->
+            ContentsResult(
+                tvResult.genreIDS,
+                tvResult.original_name,
+                tvResult.overview,
+                tvResult.popularity,
+                tvResult.name,
+                tvResult.voteAverage,
+                tvResult.voteCount,
+                " ",
+                tvResult.poster_path
+            )
+        }
+        return ContentsEntity(convertedResults)
+    }
+
     private fun initSearchObserver() {
 
         viewModel.searchMovieContentsResponse.observe(viewLifecycleOwner) {
+            Log.d("test", "MOVIE -> ${it} ")
             moviecontentsList.clear()
             for (result in it.results) {
                 moviecontentsList.add(result)
             }
 
-            val rvAdapter = SearchRVAdapter(requireContext(), moviecontentsList)
+            rvAdapter = SearchRVAdapter(requireContext(), moviecontentsList)
             binding.run {
                 searchMovieRv.adapter = rvAdapter
                 searchMovieRv.layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             }
+
+            setInfoClickListener()
         }
 
         viewModel.searchTvContentsResponse.observe(viewLifecycleOwner) {
+            val convertedContents = convertTvcontentsToContents(it)
             tvContentsList.clear()
-            for (result in it.results) {
+            for (result in convertedContents.results) {
                 tvContentsList.add(result)
             }
 
-            val rvAdapter = SearchRVAdapter(requireContext(), tvContentsList)
+            rvAdapter = SearchRVAdapter(requireContext(), tvContentsList)
             binding.run {
                 searchTvRv.adapter = rvAdapter
                 searchTvRv.layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             }
+
+            setInfoClickListener()
         }
     }
 
@@ -95,10 +130,20 @@ class SearchFragment : Fragment() {
         binding.run {
             searchBtn.setOnClickListener {
                 val title = searchEditText.text.toString()
-                viewModel.getSearchContents("movie", title, false, 1)
-                viewModel.getSearchContents("tv", title, false, 1)
+                viewModel.getSearchContents("movie", title, 1)
+                viewModel.getSearchContents("tv", title, 1)
             }
         }
+    }
+
+    private fun showInfoDialog(contents: ContentsResult) {
+        val dialog = SearchInfoDialog(
+            requireContext(),
+            contents.voteAverage,
+            contents.voteCount,
+            contents.overview
+        )
+        dialog.show()
     }
 
     override fun onDestroy() {
