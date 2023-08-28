@@ -8,14 +8,12 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.activity.viewModels
-import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Observer
 import com.bongku.mwobwa.R
 import com.bongku.mwobwa.databinding.ActivitySelectBinding
 import com.bongku.mwobwa.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.concurrent.locks.ReentrantLock
 
 @AndroidEntryPoint
 class SelectActivity : AppCompatActivity() {
@@ -25,7 +23,7 @@ class SelectActivity : AppCompatActivity() {
 
     private var flagNetflix = false
     private var flagDisney = false
-    private var flagCoupang = false
+    private var flagAppleTV = false
 
     private var ottCompany = ArrayList<String>()
 
@@ -51,7 +49,7 @@ class SelectActivity : AppCompatActivity() {
 
     private fun updateSelectButtonState() {
         binding.run {
-            selectBtn.isEnabled = flagNetflix || flagDisney || flagCoupang
+            selectBtn.isEnabled = flagNetflix || flagDisney || flagAppleTV
             if (selectBtn.isEnabled) {
                 selectBtn.visibility = View.VISIBLE
             } else {
@@ -73,11 +71,13 @@ class SelectActivity : AppCompatActivity() {
             ottCompany.remove("DISNEY")
         }
 
-        if (flagCoupang) {
-            ottCompany.add("COUPANG")
+        if (flagAppleTV) {
+            ottCompany.add("Apple tv")
         } else {
-            ottCompany.remove("COUPANG")
+            ottCompany.remove("Apple tv")
         }
+
+        Log.d("test", "updateOttCompany: ${ottCompany}")
     }
 
     private fun initSelectView() {
@@ -97,9 +97,9 @@ class SelectActivity : AppCompatActivity() {
                 updateSelectButtonState()
             }
 
-            selectCoupang.setOnClickListener {
-                flagCoupang = !flagCoupang
-                setSelectButtonColor(it, flagCoupang, R.id.select_coupang)
+            selectAppleTv.setOnClickListener {
+                flagAppleTV = !flagAppleTV
+                setSelectButtonColor(it, flagAppleTV, R.id.select_appleTv)
                 updateOttCompany()
                 updateSelectButtonState()
             }

@@ -1,16 +1,13 @@
 package com.bongku.mwobwa.data.datastore
 
 import android.content.Context
-import android.util.Log
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class MwobwaDataStore @Inject constructor(
@@ -20,13 +17,13 @@ class MwobwaDataStore @Inject constructor(
 
     private val NETFLIX = booleanPreferencesKey("NETFLIX")
     private val DISNEY = booleanPreferencesKey("DISNEY")
-    private val COUPANG = booleanPreferencesKey("COUPANG")
+    private val APPLETV = booleanPreferencesKey("APPLETV")
 
     suspend fun initializeOttCompanies() {
         context.dataStore.edit { preferences ->
             preferences[NETFLIX] = false
             preferences[DISNEY] = false
-            preferences[COUPANG] = false
+            preferences[APPLETV] = false
         }
     }
 
@@ -45,7 +42,7 @@ class MwobwaDataStore @Inject constructor(
                     }
                 } else {
                     context.dataStore.edit { preferences ->
-                        preferences[COUPANG] = true
+                        preferences[APPLETV] = true
                     }
                 }
             }
@@ -63,9 +60,9 @@ class MwobwaDataStore @Inject constructor(
             .map { preferences ->
                 preferences[DISNEY] ?: false
             }
-        val coupangValue: Flow<Boolean> = context.dataStore.data
+        val appleTvValue: Flow<Boolean> = context.dataStore.data
             .map { preferences ->
-                preferences[COUPANG] ?: false
+                preferences[APPLETV] ?: false
             }
 
         if (netflixValue.first()) {
@@ -74,8 +71,8 @@ class MwobwaDataStore @Inject constructor(
         if (disneyValue.first()) {
             contentsList.add("disney")
         }
-        if (coupangValue.first()) {
-            contentsList.add("coupang")
+        if (appleTvValue.first()) {
+            contentsList.add("appleTV")
         }
         return contentsList
     }

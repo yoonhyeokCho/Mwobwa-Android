@@ -52,12 +52,12 @@
         app:layout_constraintTop_toBottomOf="@id/select_netflix" />
 
     <TextView
-        android:id="@+id/select_coupang"
+        android:id="@+id/select_appleTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text="Coupang"
+        android:text="Apple TV"
         android:textAppearance="@style/ColorTextStyle"
         android:textSize="30sp"
         app:layout_constraintTop_toBottomOf="@id/select_disney" />
@@ -76,6 +76,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/select_coupang" />
+        app:layout_constraintTop_toBottomOf="@id/select_appleTv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

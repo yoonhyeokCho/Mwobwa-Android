@@ -93,6 +93,7 @@ class HomeViewModel @Inject constructor(
 
     fun getOttCompany() = viewModelScope.launch {
         _ottCompany.value = mwobwaDataStore.getOttCompany()
+        Log.d("test", "getOttCompany: ${mwobwaDataStore.getOttCompany()}")
     }
 
     fun insertRoomData(savedContentEntity: SavedContentEntity) =

@@ -97,7 +97,12 @@ class HomeFragment : Fragment() {
         viewModel.ottCompany.observe(viewLifecycleOwner, Observer {
             for (company in it) {
                 val randomPage = getRandomPage()
-                initGetContents(media, randomPage, company, "KR")
+                if (company == "appleTV") {
+                    initGetContents(media, randomPage, company, "CA")
+                } else {
+                    initGetContents(media, randomPage, company, "KR")
+                }
+
             }
         })
     }
@@ -111,7 +116,7 @@ class HomeFragment : Fragment() {
         var provider = 0
         if (company == "netflix") {
             provider = 8
-        } else if (company == "apple tv") {
+        } else if (company == "appleTV") {
             provider = 2
         } else {
             provider = 337
