@@ -3,37 +3,56 @@ package com.bongku.mwobwa.data.repository
 import com.bongku.mwobwa.BuildConfig
 import com.bongku.mwobwa.data.api.ContentsService
 import com.bongku.mwobwa.data.entity.ContentsEntity
+import com.bongku.mwobwa.data.entity.TvContentsEntity
 import javax.inject.Inject
 
 class ContentsRepositoryImpl @Inject constructor(
     private val contentsApi: ContentsService
 ) : ContentsRepository {
-    override suspend fun getContents(
-        mediaType: String,
-        includeAdult: Boolean,
+    override suspend fun getMovieContents(
         page: Int,
-        withCompanies: String
+        withProvider: Int,
+        watchRegion: String
     ): ContentsEntity {
-        return contentsApi.getContents(
+        return contentsApi.getMovieContents(
             api_key = BuildConfig.TMDB_API_KEY,
-            mediaType = mediaType,
-            includeAdult = includeAdult,
+            with_provider = withProvider,
             page = page,
-            withCompanies = withCompanies
+            watch_region = watchRegion
         )
     }
 
-    override suspend fun getSearchContents(
-        mediaType: String,
+    override suspend fun getSearchMovieContents(
         name: String,
-        includeAdult: Boolean,
         page: Int
     ): ContentsEntity {
-        return contentsApi.getSearchContents(
+        return contentsApi.getSearchMovieContents(
             api_key = BuildConfig.TMDB_API_KEY,
-            mediaType = mediaType,
             name = name,
-            includeAdult = includeAdult,
+            page = page
+        )
+    }
+
+    override suspend fun getTvContents(
+        page: Int,
+        withProvider: Int,
+        watchRegion: String
+    ): TvContentsEntity {
+        return contentsApi.getTvContents(
+            api_key = BuildConfig.TMDB_API_KEY,
+            with_provider = withProvider,
+            page = page,
+            watch_region = watchRegion
+        )
+    }
+
+    override suspend fun getSearchTvContents(
+        name: String,
+        page: Int
+    ): TvContentsEntity {
+        return contentsApi.getSearchTvContents(
+            api_key = BuildConfig.TMDB_API_KEY,
+            name = name,
             page = page
         )
     }

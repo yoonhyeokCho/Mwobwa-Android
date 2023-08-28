@@ -1,19 +1,28 @@
 package com.bongku.mwobwa.data.repository
 
 import com.bongku.mwobwa.data.entity.ContentsEntity
+import com.bongku.mwobwa.data.entity.TvContentsEntity
 
 interface ContentsRepository {
-    suspend fun getContents(
-        mediaType: String,
-        includeAdult: Boolean,
+    suspend fun getMovieContents(
         page: Int,
-        withCompanies: String
+        withProvider: Int,
+        watchRegion: String
     ): ContentsEntity
 
-    suspend fun getSearchContents(
-        mediaType: String,
+    suspend fun getTvContents(
+        page: Int,
+        withProvider: Int,
+        watchRegion: String
+    ): TvContentsEntity
+
+    suspend fun getSearchMovieContents(
         name: String,
-        includeAdult: Boolean,
         page: Int,
     ): ContentsEntity
+
+    suspend fun getSearchTvContents(
+        name: String,
+        page: Int,
+    ): TvContentsEntity
 }
