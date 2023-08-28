@@ -46,10 +46,15 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         contentsList.clear()
 
-        viewModel.getOttCompany()
+        if (viewModel.previousContents != null) {
+            initAdapter(viewModel.previousContents!!)
+        } else {
+            viewModel.getOttCompany()
+        }
         initOttCompanyObserver()
         initContentsObserver()
         initMediaType()
+        initRefreshBtn()
     }
 
     private fun convertTvcontentsToContents(tvContents: TvContentsEntity): ContentsEntity {
@@ -73,6 +78,8 @@ class HomeFragment : Fragment() {
         viewModel.contentsMovieResponse.observe(viewLifecycleOwner, Observer {
             val contents = getRandomContents(it)
             contentsList.add(contents)
+
+            viewModel.previousContents = contentsList.toList()
             initAdapter(contentsList)
         })
 
@@ -80,6 +87,8 @@ class HomeFragment : Fragment() {
             val convertedContents = convertTvcontentsToContents(it)
             val contents = getRandomContents(convertedContents)
             contentsList.add(contents)
+
+            viewModel.previousContents = contentsList.toList()
             initAdapter(contentsList)
         })
     }
@@ -171,6 +180,12 @@ class HomeFragment : Fragment() {
                     reloadContents()
                 }
             }
+        }
+    }
+
+    private fun initRefreshBtn() {
+        binding.homeRefresh.setOnClickListener {
+            reloadContents()
         }
     }
 
