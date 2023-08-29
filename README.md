@@ -56,6 +56,6 @@
 
 ## Figma
 
-<img width="587" alt="Mwobwa_figma" src="https://github.com/yoonhyeokCho/MRS-Android/assets/90389363/6ec99a80-97cc-419f-be2b-406f0c8123b8">
+![Mwobwa_figma](https://github.com/yoonhyeokCho/MRS-Android/assets/90389363/59e3edc2-ffc6-43bc-a43c-9e0be7cba909)
 
 [링크](https://www.figma.com/file/1FhKItDB20gWC2d4MhrSN5/Mwobwa?type=design&node-id=0-1&mode=design&t=9mbdwQq8tjqN0yE0-0)
