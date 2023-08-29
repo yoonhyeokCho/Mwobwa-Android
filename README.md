@@ -20,29 +20,26 @@
 ## 기능 및 화면
 - Splash 화면
 
-  <img width="253" alt="image" src="https://github.com/yoonhyeokCho/Mwobwa-Android/assets/90389363/aa54e2b7-edb4-4655-b9be-d632710d5791">
-
+  ![Mwobwa_splash](https://github.com/yoonhyeokCho/Mwobwa-Android/assets/90389363/86c395da-35d5-4878-846f-9006c7dd5c7b)
 
 - OTT 선택 화면
-
-  <img width="253" alt="image" src="https://github.com/yoonhyeokCho/Mwobwa-Android/assets/90389363/779a557d-f4d8-4930-9ce2-18f48da0feb4">
-  <img width="253" alt="image" src="https://github.com/yoonhyeokCho/Mwobwa-Android/assets/90389363/db30829b-0100-407e-9d99-581f546d27b8">
-
+    
+  ![Mwobwa_select1](https://github.com/yoonhyeokCho/Mwobwa-Android/assets/90389363/4dbe7062-2c8b-4da9-895b-b395365c9cf8)
+  ![Mwobwa_select2](https://github.com/yoonhyeokCho/Mwobwa-Android/assets/90389363/2001da9b-f468-4dd1-bcb0-1cfb0a6aefc6)
 
 - OTT별 영화 및 TV 시리즈 랜덤 추천 제공
-  
-  <img width="254" alt="image" src="https://github.com/yoonhyeokCho/Mwobwa-Android/assets/90389363/0be92efc-3f42-4ecf-bff8-9871ba3d25c6">
+- 
+  ![Mwobwa_home](https://github.com/yoonhyeokCho/Mwobwa-Android/assets/90389363/856c33a9-8c4d-46f9-bd5a-448efd6f8c31)
 
 - 영화 및 TV 시리즈 검색
-
-  <img width="254" alt="image" src="https://github.com/yoonhyeokCho/Mwobwa-Android/assets/90389363/87958d4c-0dc9-4897-89a5-d600cffe904d">
-  <img width="256" alt="image" src="https://github.com/yoonhyeokCho/Mwobwa-Android/assets/90389363/3ac5ac67-d159-4beb-a94e-808078817c05">
-
+  
+  ![Mwobwa_search1](https://github.com/yoonhyeokCho/Mwobwa-Android/assets/90389363/f62adc45-ba85-4ab0-9a22-c9c16e76b60e)
+  ![Mwobwa_search2](https://github.com/yoonhyeokCho/Mwobwa-Android/assets/90389363/29f24f65-330b-4a3a-af28-0e2d9cbc1803)
 
 - 찜하기 목록
-  
-  <img width="255" alt="image" src="https://github.com/yoonhyeokCho/Mwobwa-Android/assets/90389363/accd3a97-572e-4d7d-841f-a5b40fc35037">
-  <img width="257" alt="image" src="https://github.com/yoonhyeokCho/Mwobwa-Android/assets/90389363/9e719388-7fd0-4924-8233-70758de747d2">
+
+  ![Mwobwa_saved1](https://github.com/yoonhyeokCho/Mwobwa-Android/assets/90389363/2f9ce2ba-4cda-4fee-94bd-dc0da54e3b40)
+  ![Mwobwa_saved2](https://github.com/yoonhyeokCho/Mwobwa-Android/assets/90389363/73bb9efb-ca80-47bd-9fa8-0d8a334c0e35)
 
 ## Android
 - Min SDK 21
@@ -58,6 +55,7 @@
 - TMDB API
 
 ## Figma
-<img width="459" alt="image" src="https://github.com/yoonhyeokCho/Mwobwa-Android/assets/90389363/04909008-398d-4257-ac9e-1a5cfa04ffa1">
+
+<img width="587" alt="Mwobwa_figma" src="https://github.com/yoonhyeokCho/MRS-Android/assets/90389363/6ec99a80-97cc-419f-be2b-406f0c8123b8">
 
 [링크](https://www.figma.com/file/1FhKItDB20gWC2d4MhrSN5/Mwobwa?type=design&node-id=0-1&mode=design&t=9mbdwQq8tjqN0yE0-0)
